@@ -9,11 +9,15 @@ The goal is to provide a flexible plotting framework.
 
 # https://altair-viz.github.io/getting_started/overview.html
 
+from IPython import get_ipython
+from IPython.display import display, SVG
 from copy import deepcopy
 import os.path
 import pandas as pd
-import yaml
+import sys
+from tempfile import NamedTemporaryFile
 from typelike import ArrayLike
+import yaml
 
 # Include directory
 include_dir = os.path.abspath(os.path.join(__file__, '..', '_include'))
@@ -117,7 +121,7 @@ class Figure:
 
     # Convert figure to matplotlib
     # noinspection PyShadowingNames
-    def to_mpl(self, show=False):
+    def to_mpl(self, show=False, save_as=None):
         # Make sure pyplot is loaded
         import matplotlib.pyplot as plt
         set_mpl_theme()
@@ -141,10 +145,18 @@ class Figure:
         if self.get_style('legend'):
             axis.legend(bbox_to_anchor=(1., 0.5), loc='center left')
 
+        # Should we save?
+        if save_as is not None:
+            # TODO there will have to be a way to include some arguments here
+            figure.savefig(save_as)
+
         # Return
         if show:
-            figure.show()
-            plt.close()
+            if get_ipython() and 'qtconsole' not in sys.modules:
+                _display_svg(figure)
+            else:
+                figure.show()
+            # plt.close()
         else:
             return figure
 
@@ -183,6 +195,11 @@ class FigureObject(Figure):
 
         # Return
         return data
+
+
+class Style:
+    def __init__(self, **kwargs):
+        pass
 
 
 class Bar(FigureObject):
@@ -359,3 +376,12 @@ def _coerce_style(style, defaults=None):
 #     + line([1, 2, 3], [4, 5, 6], style={'marker': 'circle', 'ylabel': 'y1'})
 #     + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'ylabel': 'y2'})
 # ).to_mpl(show=True)
+
+
+# Display SVG in IPython
+def _display_svg(figure):
+    with NamedTemporaryFile(delete=False) as tempfile:
+        filename = str(tempfile.name) + '.svg'
+    figure.savefig(filename=filename, transparent=True)
+    display(SVG(filename))
+    os.remove(filename)
