@@ -14,7 +14,7 @@ import yaml
 from typelike import ArrayLike
 
 # Include directory
-include_dir = os.path.abspath(os.path.join(__file__, '../../include'))
+include_dir = os.path.abspath(os.path.join(__file__, '_ include'))
 
 # TODO lazy load this please
 with open(os.path.join(include_dir, 'markers_mpl.yml'), 'r') as stream:
