@@ -3,8 +3,8 @@
 .hypothesis/
 .hypothesis/*
 /.idea/
-/izzy.egg-info/
 /_logs/
 /_logs/*
 __pycache__/
 __pycache__/*
+/uplot.egg-info/

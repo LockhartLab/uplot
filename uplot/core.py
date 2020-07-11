@@ -340,9 +340,9 @@ def _coerce_style(style, defaults=None):
                 style[key] = defaults[key]
     return style
 
-
-(
-    figure(style={'xtitle': '$x$', 'ytitle': '$y$', 'legend': True})
-    + line([1, 2, 3], [4, 5, 6], style={'marker': 'circle', 'ylabel': 'y1'})
-    + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'ylabel': 'y2'})
-).to_mpl(show=True)
+#
+# (
+#     figure(style={'xtitle': '$x$', 'ytitle': '$y$', 'legend': True})
+#     + line([1, 2, 3], [4, 5, 6], style={'marker': 'circle', 'ylabel': 'y1'})
+#     + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'ylabel': 'y2'})
+# ).to_mpl(show=True)
