@@ -4,7 +4,7 @@
 a generic package for plotting
 
 <span style="white-space: nowrap;">
-    <a href="https://travis-ci.com/github/LockhartLab/uplot"><img src="https://img.shields.io/pypi/v/uplot" /></a>
+    <a href="https://pypi.org/project/uplot"><img src="https://img.shields.io/pypi/v/uplot" /></a>
     <a href="https://travis-ci.com/github/LockhartLab/uplot"><img src="https://img.shields.io/travis/com/lockhartlab/uplot/master" /></a>
     <a href="https://codecov.io/gh/LockhartLab/uplot"><img src="https://img.shields.io/codecov/c/github/lockhartlab/uplot/master" /></a>
 </span>
