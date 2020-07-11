@@ -87,6 +87,10 @@ class Figure:
         # Return
         return obj
 
+    def __repr__(self):
+        self.to_mpl(show=True)
+        return ''
+
     # Add FigureObject
     def add_figure_object(self, figure_object):
         """
@@ -382,6 +386,6 @@ def _coerce_style(style, defaults=None):
 def _display_svg(figure):
     with NamedTemporaryFile(delete=False) as tempfile:
         filename = str(tempfile.name) + '.svg'
-    figure.savefig(filename=filename, transparent=True)
+    figure.savefig(fname=filename, transparent=True)
     display(SVG(filename))
     os.remove(filename)
