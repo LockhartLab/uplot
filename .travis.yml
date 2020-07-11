@@ -1,0 +1,24 @@
+
+language: python
+python: 3.8
+
+# run all tests
+script:
+  - echo 0
+
+# after a successful test, upload to codecov.io
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+# deploy to pypi
+deploy:
+  - provider: pypi
+    user: "__token__"
+    password:
+      secure: rJSvuQNi2Dc/kHhY31JhOQFQTMFFn9cH14OtznwkkrBDmjCaZAKf7LGXhGTsnWKkzgNLYLvqyiuxA7/NKJyOpEdbHrZ34yFIyp/QEQurjYff45kR+l0RTl6bBL8Fa3yUFIPROnFvZAtebW2+9c4kdgAslDXifPNzq0CTUJ50lHEXH/FCJ2Or2dam3hLda13WujJHUJht96G3vvIz5/VVE47R68pdwar5BfVMHKM3dfgH0uWEgsfTqHsN6W9FM6aCiaitPORCwEXwJgeb3qJwze4lP+ualnGMizLKgODqyTRwc0t+3/uOkhuQ05lyFixPs0gCEojcNPp8i47yVLriq071+8Jdq/AIzvRMf5XaOS6WB3ay2zhFfSEPdHs9JAET8rMIZEFpboIPCxIA3e1i4VDd3Ss0YyLr2tGBSENlXhLb7HDiFODF6oNOXIYx9T84Gj03YM4k1uba/Y/ADz5a3mQU115uHdqIr0oAk6FVuBPnKKfj2FWYl2KFPG9Zse5ihgLYmhZEzbXLBLGYRnJjzn+nBpjzrbjzQ6VPwxkcEzc9zVm8JO9TPdLxAc94mvdasUaFEv7W046VDghnWZgtrmbN6rzGU8qpXOKJbHP0MW6Yx8YvcEa8ELeKaTBORSbyGD/CNJixZY8szyC/D6poiU65eIDjBnCyZF7z5pvsKts=
+    twine_check: true
+    distributions: "sdist bdist_wheel"
+    skip_cleanup: true
+    on:
+      tags: true
+

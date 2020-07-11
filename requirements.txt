@@ -1,0 +1,11 @@
+codecov
+coverage
+gitpipe
+hypothesis
+IPython
+matplotlib
+numpy
+pandas
+plotnine
+pyyaml
+typelike

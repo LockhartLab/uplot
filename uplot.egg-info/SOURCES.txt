@@ -1,0 +1,15 @@
+MANIFEST.in
+README.md
+requirements.txt
+setup.py
+version.yml
+uplot/__init__.py
+uplot/core.py
+uplot/old.py
+uplot/options.py
+uplot.egg-info/PKG-INFO
+uplot.egg-info/SOURCES.txt
+uplot.egg-info/dependency_links.txt
+uplot.egg-info/requires.txt
+uplot.egg-info/top_level.txt
+uplot.egg-info/zip-safe

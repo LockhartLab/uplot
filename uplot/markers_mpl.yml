@@ -1,0 +1,4 @@
+# Add more when not lazy https://matplotlib.org/3.2.1/api/markers_api.html#module-matplotlib.markers
+point: "."
+pixel: ","
+circle: "o"
