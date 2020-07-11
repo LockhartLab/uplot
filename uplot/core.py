@@ -8,12 +8,15 @@ The goal is to provide a flexible plotting framework.
 """
 
 from copy import deepcopy
+import os.path
 import pandas as pd
 import yaml
 from typelike import ArrayLike
 
+include_dir = os.path.abspath(__file__ + '/../../include')
+
 # TODO lazy load this please
-with open('markers_mpl.yml', 'r') as stream:
+with open(os.path.join(include_dir, 'markers_mpl.yml'), 'r') as stream:
     markers_mpl = yaml.safe_load(stream.read())
 
 
