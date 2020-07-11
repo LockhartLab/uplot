@@ -7,6 +7,8 @@ The goal is to provide a flexible plotting framework.
 >>> plot(x, y)
 """
 
+# https://altair-viz.github.io/getting_started/overview.html
+
 from copy import deepcopy
 import os.path
 import pandas as pd
@@ -41,17 +43,20 @@ def set_mpl_theme():
 
     # set style
     plt.style.use('_classic_test')
-    plt.rcParams.update({'axes.grid':True,
-        'axes.labelsize':18,
-        'axes.titlesize':18,
-        'font.size':18,
-        'legend.fontsize':18,
-        'xtick.labelsize':18,
-        'ytick.labelsize':18,
-    })
+    plt.rcParams.update({'axes.grid': True,
+                         'axes.labelsize': 18,
+                         'axes.titlesize': 18,
+                         'figure.facecolor': 'white',
+                         'font.size': 18,
+                         'legend.fontsize': 18,
+                         'xtick.labelsize': 18,
+                         'ytick.labelsize': 18,
+                         })
     plt.rc('text', usetex=True)
 
+
 _style_defaults = {
+    'background': 'white',
     'legend': False
 }
 
@@ -112,7 +117,7 @@ class Figure:
 
     # Convert figure to matplotlib
     # noinspection PyShadowingNames
-    def to_mpl(self, show=True):
+    def to_mpl(self, show=False):
         # Make sure pyplot is loaded
         import matplotlib.pyplot as plt
         set_mpl_theme()
@@ -124,6 +129,9 @@ class Figure:
         # Iterate through figure objects and draw
         for figure_object in self._figure_objects:
             figure_object._to_mpl(figure, axis)
+
+        # Canvas
+        figure.patch.set_facecolor(self.get_style('background'))
 
         # Set plot elements
         axis.set_xlabel(self.get_style('xtitle'))
@@ -175,6 +183,7 @@ class FigureObject(Figure):
 
         # Return
         return data
+
 
 class Bar(FigureObject):
     def __init__(self, data=None, style=None):
