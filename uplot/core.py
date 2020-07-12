@@ -89,7 +89,7 @@ class Figure:
 
     def __repr__(self):
         self.to_mpl(show=True)
-        return ''
+        return self.__str__()
 
     # Add FigureObject
     def add_figure_object(self, figure_object):
@@ -140,6 +140,7 @@ class Figure:
 
         # Canvas
         figure.patch.set_facecolor(self.get_style('background'))
+        plt.tight_layout()
 
         # Set plot elements
         axis.set_xlabel(self.get_style('xtitle'))
