@@ -89,7 +89,7 @@ class Figure:
 
     def __repr__(self):
         self.to_mpl(show=True)
-        return super().__str__(self)
+        return super().__repr__()
 
     # Add FigureObject
     def add_figure_object(self, figure_object):
