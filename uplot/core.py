@@ -28,6 +28,8 @@ with open(os.path.join(include_dir, 'markers_mpl.yml'), 'r') as stream:
 
 
 # Style defaults
+# TODO make this customizable
+# https://matplotlib.org/3.2.2/gallery/style_sheets/style_sheets_reference.html
 def set_mpl_theme():
     import matplotlib.pyplot as plt
     # plt.style.use('default')
@@ -46,7 +48,8 @@ def set_mpl_theme():
     # })
 
     # set style
-    plt.style.use('_classic_test_patch')
+    # plt.style.use('_classic_test')
+    plt.style.use('seaborn-whitegrid')
     plt.rcParams.update({'axes.grid': True,
                          'axes.labelsize': 18,
                          'axes.titlesize': 18,
@@ -66,6 +69,7 @@ _style_defaults = {
 
 
 # https://ggplot2-book.org/polishing.html
+# TODO one day think about SVG bounding box https://matplotlib.org/3.2.2/api/backend_svg_api.html
 class Figure:
     def __init__(self, data=None, style=None):
         self._data = data
