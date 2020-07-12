@@ -160,7 +160,8 @@ class Figure:
                 _display_svg(figure)
             else:
                 figure.show()
-            # plt.close()
+            plt.close(figure)
+            return None
         else:
             return figure
 
