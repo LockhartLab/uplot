@@ -46,7 +46,7 @@ def set_mpl_theme():
     # })
 
     # set style
-    plt.style.use('_classic_test')
+    plt.style.use('_classic_test_patch')
     plt.rcParams.update({'axes.grid': True,
                          'axes.labelsize': 18,
                          'axes.titlesize': 18,
