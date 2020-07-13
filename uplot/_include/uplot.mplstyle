@@ -1,0 +1,64 @@
+# https://matplotlib.org/3.2.1/tutorials/introductory/customizing.html#customizing-with-matplotlibrc-files
+
+# figure
+figure.facecolor: white
+
+# axes
+axes.labelcolor: black
+axes.facecolor: white
+axes.edgecolor: black
+axes.linewidth: 1
+axes.grid: False
+axes.axisbelow: True
+axes.prop_cycle: cycler('color', ['E24A33', '348ABD', '988ED5', '777777', 'FBC15E', '8EBA42', 'FFB5B8'])
+                   # E24A33 : red
+                   # 348ABD : blue
+                   # 988ED5 : purple
+                   # 777777 : gray
+                   # FBC15E : yellow
+                   # 8EBA42 : green
+                   # FFB5B8 : pink
+# x ticks
+xtick.top: True
+xtick.bottom: True
+xtick.direction: in
+xtick.color: black
+xtick.major.size: 10
+xtick.minor.top: True
+xtick.minor.bottom: True
+xtick.minor.size: 5
+xtick.minor.visible: True
+
+# y ticks
+ytick.left: True
+ytick.right: True
+ytick.direction: in
+ytick.color: black
+ytick.major.size: 14
+ytick.minor.left: True
+ytick.minor.right: True
+ytick.minor.size: 5
+ytick.minor.visible: True
+
+# text
+text.color: black
+text.usetex: False
+font.style: normal
+font.variant: normal
+font.weight: normal
+font.stretch: normal
+#font.family: sans-serif
+#font.sans-serif: Arial
+
+# legend
+legend.frameon: False
+legend.numpoints: 1
+legend.scatterpoints: 1
+
+# specific parameters
+image.cmap: rainbow
+lines.solid_capstyle: round
+
+# grid
+# grid.linestyle: -
+# grid.color: .8

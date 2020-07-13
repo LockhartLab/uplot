@@ -20,7 +20,7 @@ from typelike import ArrayLike
 import yaml
 
 # Include directory
-include_dir = os.path.abspath(os.path.join(__file__, '..', '_include'))
+include_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_include')
 
 # TODO lazy load this please
 with open(os.path.join(include_dir, 'markers_mpl.yml'), 'r') as stream:
@@ -48,18 +48,20 @@ def set_mpl_theme():
     # })
 
     # set style
-    # plt.style.use('_classic_test')
-    plt.style.use('seaborn-whitegrid')
-    plt.rcParams.update({'axes.grid': True,
-                         'axes.labelsize': 18,
-                         'axes.titlesize': 18,
-                         'figure.facecolor': 'white',
-                         'font.size': 18,
-                         'legend.fontsize': 18,
-                         'xtick.labelsize': 18,
-                         'ytick.labelsize': 18,
-                         })
-    plt.rc('text', usetex=True)
+    # # plt.style.use('_classic_test')
+    # plt.style.use('seaborn-whitegrid')
+    # plt.rcParams.update({'axes.grid': True,
+    #                      'axes.labelsize': 18,
+    #                      'axes.titlesize': 18,
+    #                      'figure.facecolor': 'white',
+    #                      'font.size': 18,
+    #                      'legend.fontsize': 18,
+    #                      'xtick.labelsize': 18,
+    #                      'ytick.labelsize': 18,
+    #                      })
+    # plt.rc('text', usetex=True)
+    # TODO allow user to specify different style in options
+    plt.style.use(os.path.join(include_dir, 'uplot.mplstyle'))
 
 
 _style_defaults = {
