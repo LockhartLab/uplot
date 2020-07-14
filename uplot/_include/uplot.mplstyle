@@ -49,7 +49,6 @@ xtick.labelsize: 12
 ytick.labelsize: 12
 
 # legend
-legend.
 legend.frameon: False
 legend.numpoints: 1
 legend.scatterpoints: 1
