@@ -241,9 +241,9 @@ class Line(FigureObject):
         x = data.index.values
 
         # Loop over all columns
-        for i, column in enumerate(self._data.columns):
+        for i, column in enumerate(data.columns):
             # Get y for column
-            y = self._data[column].values
+            y = data[column].values
             ylabel = self.get_style('ylabel', default=column, index=i)
             marker = self.get_style('marker', index=i)
             if marker is not None:
@@ -265,13 +265,13 @@ class Line(FigureObject):
 #             axis.plot(x, y, 'o', label=column)
 
 
-def figure(data=None, x=None, y=None, style=None):
+def figure(data_or_x=None, y=None, style=None):
     """
     Create a figure.
 
     Parameters
     ----------
-    data : pandas.DataFrame
+    data_or_x : pandas.DataFrame or ArrayLike
         If provided, uses the data in `data` for the figure.
     x : str or ArrayLike
         If provided, and `data` is not set, this is the independent variable.
