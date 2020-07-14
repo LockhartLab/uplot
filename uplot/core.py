@@ -65,7 +65,6 @@ def set_mpl_theme():
 
 
 _style_defaults = {
-    'background': 'white',
     'legend': False
 }
 
@@ -380,6 +379,7 @@ def _coerce_style(style, defaults=None):
             if key not in style:
                 style[key] = defaults[key]
     return style
+
 
 #
 # (

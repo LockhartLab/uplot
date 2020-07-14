@@ -42,8 +42,14 @@ font.weight: normal
 font.family: sans-serif
 font.sans-serif: Arial
 font.size: 12
+axes.labelsize: 12
+axes.titlesize: 12
+legend.fontsize: 12
+xtick.labelsize: 12
+ytick.labelsize: 12
 
 # legend
+legend.
 legend.frameon: False
 legend.numpoints: 1
 legend.scatterpoints: 1

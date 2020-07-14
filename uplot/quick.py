@@ -10,7 +10,7 @@ from typelike import ArrayLike
 
 
 # Plot
-def plot(x, y=None, xtitle=None, ytitle=None, legend=True, show=True):
+def plot(x, y=None, xtitle=None, ytitle=None, legend=True, marker=None, show=True):
     """
 
 
@@ -37,11 +37,14 @@ def plot(x, y=None, xtitle=None, ytitle=None, legend=True, show=True):
     """
 
     # Create figure
-    figure = core.figure(x, y, style={'xtitle': xtitle, 'ytitle': ytitle, 'legend': legend})
+    figure = core.figure(x=x, y=y, style={'xtitle': xtitle, 'ytitle': ytitle, 'legend': legend})
 
     # Start building the figure
-    figure += core.line()
+    figure += core.line(style={'marker': marker})
 
     # Return
-    return figure.to_mpl(show=show)
+    if show:
+        figure.to_mpl(show=show)
+    else:
+        return figure.to_mpl(show=False)
 
