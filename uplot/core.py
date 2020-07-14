@@ -146,7 +146,6 @@ class Figure:
 
         # Canvas
         figure.patch.set_facecolor(self.get_style('background'))
-        plt.tight_layout()
 
         # Set plot elements
         axis.set_xlabel(self.get_style('xtitle'))
@@ -163,7 +162,7 @@ class Figure:
 
         # Return
         if show:
-            if get_ipython() and 'qtconsole' not in sys.modules:
+            if _is_jupyter():
                 _display_svg(figure)
             else:
                 figure.show()
@@ -209,9 +208,9 @@ class FigureObject(Figure):
         return data
 
 
-class Style:
-    def __init__(self, **kwargs):
-        pass
+# class Style:
+#     def __init__(self, **kwargs):
+#         self._kwargs = kwargs
 
 
 class Bar(FigureObject):
@@ -389,11 +388,14 @@ def _coerce_style(style, defaults=None):
 #     + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'ylabel': 'y2'})
 # ).to_mpl(show=True)
 
+def _is_jupyter():
+    return get_ipython() and 'qtconsole' not in sys.modules
 
-# Display SVG in IPython
-def _display_svg(figure):
+
+# Display SVG in IPython (for matplotlib)
+def _display_svg(fig):
     with NamedTemporaryFile(delete=False) as tempfile:
         filename = str(tempfile.name) + '.svg'
-    figure.savefig(fname=filename, transparent=True)
+    fig.savefig(fname=filename, transparent=True)
     display(SVG(filename))
     os.remove(filename)

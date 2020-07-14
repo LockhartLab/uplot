@@ -2,22 +2,17 @@
 
 # figure
 figure.facecolor: white
+figure.autolayout: True
 
 # axes
 axes.labelcolor: black
 axes.facecolor: white
 axes.edgecolor: black
 axes.linewidth: 1
-axes.grid: False
+axes.grid: True
 axes.axisbelow: True
-axes.prop_cycle: cycler('color', ['E24A33', '348ABD', '988ED5', '777777', 'FBC15E', '8EBA42', 'FFB5B8'])
-                   # E24A33 : red
-                   # 348ABD : blue
-                   # 988ED5 : purple
-                   # 777777 : gray
-                   # FBC15E : yellow
-                   # 8EBA42 : green
-                   # FFB5B8 : pink
+# axes.prop_cycle: cycler('color', ['E24A33', '348ABD', '988ED5', '777777', 'FBC15E', '8EBA42', 'FFB5B8'])
+
 # x ticks
 xtick.top: True
 xtick.bottom: True
@@ -34,7 +29,7 @@ ytick.left: True
 ytick.right: True
 ytick.direction: in
 ytick.color: black
-ytick.major.size: 14
+ytick.major.size: 10
 ytick.minor.left: True
 ytick.minor.right: True
 ytick.minor.size: 5
@@ -42,13 +37,11 @@ ytick.minor.visible: True
 
 # text
 text.color: black
-text.usetex: False
 font.style: normal
-font.variant: normal
 font.weight: normal
-font.stretch: normal
-#font.family: sans-serif
-#font.sans-serif: Arial
+font.family: sans-serif
+font.sans-serif: Arial
+font.size: 12
 
 # legend
 legend.frameon: False
@@ -60,5 +53,5 @@ image.cmap: rainbow
 lines.solid_capstyle: round
 
 # grid
-# grid.linestyle: -
-# grid.color: .8
+grid.linestyle: :
+grid.color: lightgray
