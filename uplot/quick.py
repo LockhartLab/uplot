@@ -6,17 +6,18 @@ author: C. Lockhart <chris@lockhartlab.org>
 
 from . import core
 
+import pandas as pd
 from typelike import ArrayLike
 
 
 # Plot
-def plot(x, y=None, xtitle=None, ytitle=None, xrotation=None, figsize=None, legend=False, marker=None, show=True):
+def plot(data_or_x, y=None, xtitle=None, ytitle=None, xrotation=None, figsize=None, legend=False, marker=None, show=True):
     """
 
 
     Parameters
     ----------
-    x : pandas.DataFrame or ArrayLike
+    data_or_x : pandas.DataFrame or ArrayLike
         DataFrame to plot, or the `x` dimension for plotting.
     y : ArrayLike or None
         If present, `y` dimension for plotting. If this is an array of arrays, every interior array will be treated
@@ -36,8 +37,16 @@ def plot(x, y=None, xtitle=None, ytitle=None, xrotation=None, figsize=None, lege
         Figure or nothing, depending on `show`.
     """
 
+    # Handle data_or_x
+    if isinstance(data_or_x, pd.DataFrame):
+        data = data_or_x
+        x = None
+    else:
+        data = None
+        x = data_or_x
+
     # Create figure
-    figure = core.figure(x=x, y=y, style={
+    figure = core.figure(data=data, x=x, y=y, style={
         'xtitle': xtitle,
         'ytitle': ytitle,
         'xrotation': xrotation,
