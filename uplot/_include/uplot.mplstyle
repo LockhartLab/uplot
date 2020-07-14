@@ -2,6 +2,7 @@
 
 # figure
 figure.facecolor: white
+patch.facecolor: white
 figure.autolayout: True
 
 # axes
@@ -60,3 +61,8 @@ lines.solid_capstyle: round
 # grid
 grid.linestyle: :
 grid.color: lightgray
+
+# bar
+patch.edgecolor: black
+patch.linewidth: 1
+patch.force_edgecolor: True

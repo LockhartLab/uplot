@@ -10,7 +10,7 @@ The goal is to provide a flexible plotting framework.
 # https://altair-viz.github.io/getting_started/overview.html
 
 from IPython import get_ipython
-from IPython.display import display, SVG
+from IPython.display import display, HTML, SVG
 from copy import deepcopy
 import os.path
 import pandas as pd
@@ -18,6 +18,16 @@ import sys
 from tempfile import NamedTemporaryFile
 from typelike import ArrayLike
 import yaml
+
+# TODO facet wrap (?) pandas does this, maybe back into it that way
+# this is not a high priority for me
+"""
+>>> import uplot as u
+>>> # facet_wrap => for every column in data, create line
+>>> u.figure(data) + u.line() + u.facet_wrap(n_col=4)  
+>>> # facet_grid => for every unique label in column, create and xy line
+>>> u.figure(data) + u.line() + u.facet_grid(column='label', x='x', y='y', n_col=4)    
+"""
 
 # Include directory
 include_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_include')
@@ -144,7 +154,7 @@ class Figure:
             figure_object._to_mpl(figure, axis)
 
         # Canvas
-        figure.patch.set_facecolor(self.get_style('background'))
+        # figure.patch.set_facecolor(self.get_style('background'))
 
         # Set plot elements
         axis.set_xlabel(self.get_style('xtitle'))
@@ -174,7 +184,13 @@ class Figure:
         pass
 
     def to_plotly(self):
-        pass
+        import plotly.graph_objects as go
+        figure = go.Figure()
+        for figure_object in self._figure_objects:
+            figure_object._to_mpl(figure)
+        display(HTML(figure.to_html()))
+
+
 
 
 class FigureObject(Figure):
@@ -250,6 +266,22 @@ class Line(FigureObject):
                 marker = markers_mpl[marker]
             axis.plot(x, y, label=ylabel, marker=marker)
 
+    def _to_plotly(self, figure):
+        import plotly.graph_objects as go
+
+        # Get data
+        data = self._get_data()
+        x = data.index.values
+
+        # Loop over all columns
+        for i, column in enumerate(data.columns):
+            # Get y for column
+            y = data[column].values
+            ylabel = self.get_style('ylabel', default=column, index=i)
+            # marker = self.get_style('marker', index=i)
+            # if marker is not None:
+            #     marker = markers_mpl[marker]
+            figure.add_trace(go.Scatter(x=x, y=y, mode='lines', name=ylabel))
 
 #
 # class Point(FigureObject):

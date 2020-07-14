@@ -10,7 +10,7 @@ from typelike import ArrayLike
 
 
 # Plot
-def plot(x, y=None, xtitle=None, ytitle=None, legend=True, marker=None, show=True):
+def plot(x, y=None, xtitle=None, ytitle=None, legend=False, marker=None, show=True):
     """
 
 
