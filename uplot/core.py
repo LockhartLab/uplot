@@ -265,13 +265,13 @@ class Line(FigureObject):
 #             axis.plot(x, y, 'o', label=column)
 
 
-def figure(data_or_x=None, y=None, style=None):
+def figure(data=None, x=None, y=None, style=None):
     """
     Create a figure.
 
     Parameters
     ----------
-    data_or_x : pandas.DataFrame or ArrayLike
+    datax : pandas.DataFrame
         If provided, uses the data in `data` for the figure.
     x : str or ArrayLike
         If provided, and `data` is not set, this is the independent variable.
@@ -358,7 +358,16 @@ def _coerce_data_x_y(data, x, y):
 
     # Otherwise, if data is a DataFrame, extract out x and y columns
     elif isinstance(data, pd.DataFrame):
-        data = data.set_index(x)[y].copy()
+        # Create a copy of the dataframe
+        data = data.copy()
+
+        # Set the index
+        if x is not None:
+            data = data.set_index(x)
+
+        # Extract columns (need to create a copy so we're not working on a slice)
+        if y is not None:
+            data = data[y].copy()
 
     # Otherwise, if data is a Series, convert to DataFrame
     elif isinstance(data, pd.Series):
