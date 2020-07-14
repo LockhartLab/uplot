@@ -187,7 +187,7 @@ class Figure:
         import plotly.graph_objects as go
         figure = go.Figure()
         for figure_object in self._figure_objects:
-            figure_object._to_mpl(figure)
+            figure_object._to_plotly(figure)
         display(HTML(figure.to_html()))
 
 
