@@ -161,6 +161,9 @@ class Figure:
         axis.set_ylabel(self.get_style('ytitle'))
         axis.set_xlim(self.get_style('xmin'), self.get_style('xmax'))
         axis.set_ylim(self.get_style('ymin'), self.get_style('ymax'))
+        axis.tick_params(axis='x', labelrotation=self.get_style('xrotation'))
+
+        # Legend
         if self.get_style('legend'):
             axis.legend(bbox_to_anchor=(1., 0.5), loc='center left')
 
@@ -183,12 +186,12 @@ class Figure:
     def to_plotnine(self):
         pass
 
-    def to_plotly(self):
+    def to_plotly(self, height='4.8in', width='6.4in'):
         import plotly.graph_objects as go
         figure = go.Figure()
         for figure_object in self._figure_objects:
             figure_object._to_plotly(figure)
-        display(HTML(figure.to_html()))
+        display(HTML(figure.to_html(default_height=height, default_width=width)))
 
 
 
