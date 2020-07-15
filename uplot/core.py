@@ -120,7 +120,11 @@ class Figure:
         set_mpl_theme()
 
         # Create the figure and axis
-        figure = plt.figure(figsize=(self.get_style('width'), self.get_style('height')))  # type: plt.Figure
+        height, width = self.get_style('height'), self.get_style('width')
+        figsize = None
+        if height is not None and width is not None:
+            figsize = (width, height)
+        figure = plt.figure(figsize=figsize)  # type: plt.Figure
         axis = figure.add_subplot()
 
         # Iterate through figure objects and draw
