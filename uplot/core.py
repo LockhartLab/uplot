@@ -148,7 +148,7 @@ class Figure:
         set_mpl_theme()
 
         # Create the figure and axis
-        figure = plt.figure(figsize=self.get_style('figsize'))  # type: plt.Figure
+        figure = plt.figure(figsize=(self.get_style('width'), self.get_style('height')))  # type: plt.Figure
         axis = figure.add_subplot()
 
         # Iterate through figure objects and draw

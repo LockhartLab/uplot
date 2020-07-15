@@ -11,7 +11,8 @@ from typelike import ArrayLike
 
 
 # Plot
-def plot(data_or_x, y=None, xtitle=None, ytitle=None, xrotation=None, figsize=None, legend=False, marker=None, show=True):
+def plot(data_or_x, y=None, xtitle=None, ytitle=None, xrotation=None, height=None, width=None, legend=False,
+         marker=None, show=True):
     """
 
 
@@ -50,7 +51,8 @@ def plot(data_or_x, y=None, xtitle=None, ytitle=None, xrotation=None, figsize=No
         'xtitle': xtitle,
         'ytitle': ytitle,
         'xrotation': xrotation,
-        'figsize': figsize,
+        'height': height,
+        'width': width,
         'legend': legend
     })
 
