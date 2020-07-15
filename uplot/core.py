@@ -378,7 +378,7 @@ def _coerce_data_x_y(data, x, y):
         # If both of x and y are arrays, build DataFrame
         if isinstance(x, ArrayLike) and isinstance(y, ArrayLike):
             # Make sure y is an array of arrays (for simplicity)
-            if not isinstance(y[0], ArrayLike):
+            if isinstance(y, pd.Series) or not isinstance(y[0], ArrayLike):
                 y = [y]
 
             # Build DataFrame
