@@ -1,0 +1,5 @@
+solid: '-'
+dashed: '--'
+dashdot: '-.'
+dotted: ':'
+none: ''

@@ -36,6 +36,8 @@ include_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_include
 with open(os.path.join(include_dir, 'markers_mpl.yml'), 'r') as stream:
     markers_mpl = yaml.safe_load(stream.read())
 
+with open(os.path.join(include_dir, 'linestyles_mpl.yml'), 'r') as stream:
+    linestyles_mpl = yaml.safe_load(stream.read())
 
 # Style defaults
 # TODO make this customizable
@@ -265,10 +267,13 @@ class Line(FigureObject):
             y = data[column].values
             label = self.get_style('label', default=column, index=i)
             color = self.get_style('color', index=i)
+            linestyle = self.get_style('linestyle', index=i)
+            if linestyle is not None:
+                linestyle = linestyles_mpl[linestyle]
             marker = self.get_style('marker', index=i)
             if marker is not None:
                 marker = markers_mpl[marker]
-            axis.plot(x, y, label=label, color=color, marker=marker)
+            axis.plot(x, y, label=label, color=color, linestyle=linestyle, marker=marker)
 
     def _to_plotly(self, figure):
         import plotly.graph_objects as go
