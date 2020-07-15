@@ -317,16 +317,16 @@ def figure(data=None, x=None, y=None, style=None):
 
 def bar(x=None, y=None, style=None):
     data = _coerce_data_x_y(None, x, y)
-    style = _coerce_style(style, defaults={'linestyle': 'solid'})
+    style = _coerce_style(style, defaults={'line_style': 'solid'})
     element = Bar(data, style)
     return element
 
 
-def line(x=None, y=None, line_style=None):
+def line(x=None, y=None, style=None):
     data = None
     if x is not None and y is not None:
         data = _coerce_data_x_y(None, x, y)
-    style = _coerce_style(line_style, defaults={'line_style': 'solid'})
+    style = _coerce_style(style, defaults={'line_style': 'solid'})
     element = Line(data, style)
     return element
 
