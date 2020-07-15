@@ -391,7 +391,7 @@ def _coerce_data_x_y(data, x, y):
                 else:
                     y_label_default = 'y' + str(i)
                 y_label = _get_label(yi, default=y_label_default)
-                data[y_label] = yi
+                data[y_label] = yi if not isinstance(yi, pd.Series) else yi.values
 
         # If data is not set, and x and y are not arrays, we don't know what we're doing
         elif x is not None or y is not None:
