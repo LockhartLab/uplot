@@ -245,8 +245,8 @@ class Bar(FigureObject):
         for i, column in enumerate(self._data.columns):
             # Get y for column
             y = self._data[column].values
-            ylabel = self.get_style('ylabel', default=column, index=i)
-            axis.bar(x, y, label=ylabel)
+            label = self.get_style('label', default=column, index=i)
+            axis.bar(x, y, label=label)
 
 
 class Line(FigureObject):
@@ -263,11 +263,12 @@ class Line(FigureObject):
         for i, column in enumerate(data.columns):
             # Get y for column
             y = data[column].values
-            ylabel = self.get_style('ylabel', default=column, index=i)
+            label = self.get_style('label', default=column, index=i)
+            color = self.get_style('color', index=i)
             marker = self.get_style('marker', index=i)
             if marker is not None:
                 marker = markers_mpl[marker]
-            axis.plot(x, y, label=ylabel, marker=marker)
+            axis.plot(x, y, label=label, color=color, marker=marker)
 
     def _to_plotly(self, figure):
         import plotly.graph_objects as go
@@ -280,11 +281,11 @@ class Line(FigureObject):
         for i, column in enumerate(data.columns):
             # Get y for column
             y = data[column].values
-            ylabel = self.get_style('ylabel', default=column, index=i)
+            label = self.get_style('label', default=column, index=i)
             # marker = self.get_style('marker', index=i)
             # if marker is not None:
             #     marker = markers_mpl[marker]
-            figure.add_trace(go.Scatter(x=x, y=y, mode='lines', name=ylabel))
+            figure.add_trace(go.Scatter(x=x, y=y, mode='lines', name=label))
 
 #
 # class Point(FigureObject):
@@ -430,8 +431,8 @@ def _coerce_style(style, defaults=None):
 #
 # (
 #     figure(style={'xtitle': '$x$', 'ytitle': '$y$', 'legend': True})
-#     + line([1, 2, 3], [4, 5, 6], style={'marker': 'circle', 'ylabel': 'y1'})
-#     + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'ylabel': 'y2'})
+#     + line([1, 2, 3], [4, 5, 6], style={'marker': 'circle', 'label': 'y1'})
+#     + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'label': 'y2'})
 # ).to_mpl(show=True)
 
 def _is_jupyter():
