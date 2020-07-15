@@ -3,4 +3,6 @@ import sys
 
 this = sys.modules[__name__]
 
-this.plotter = 'mpl'
+this.backend = 'mpl'
+this.layout = 'uplot'
+
