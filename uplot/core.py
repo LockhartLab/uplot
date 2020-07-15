@@ -33,46 +33,18 @@ import yaml
 include_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_include')
 
 # TODO lazy load this please
-with open(os.path.join(include_dir, 'markers_mpl.yml'), 'r') as stream:
-    markers_mpl = yaml.safe_load(stream.read())
+with open(os.path.join(include_dir, 'mpl_markers.yml'), 'r') as stream:
+    mpl_markers = yaml.safe_load(stream.read())
 
-with open(os.path.join(include_dir, 'linestyles_mpl.yml'), 'r') as stream:
-    linestyles_mpl = yaml.safe_load(stream.read())
+with open(os.path.join(include_dir, 'mpl_line_styles.yml'), 'r') as stream:
+    mpl_line_styles = yaml.safe_load(stream.read())
+
 
 # Style defaults
-# TODO make this customizable
+# TODO make this customizable; allow user to specify different style in options
 # https://matplotlib.org/3.2.2/gallery/style_sheets/style_sheets_reference.html
 def set_mpl_theme():
     import matplotlib.pyplot as plt
-    # plt.style.use('default')
-    # plt.style.use('seaborn')
-    # font_size = 18
-    # plt.rcParams.update({
-    #     'axes.labelsize': font_size,
-    #     'axes.titlesize': font_size,
-    #     'figure.titlesize': font_size,
-    #     'font.size': font_size,
-    #     'font.family': 'DejaVu Sans',
-    #     'legend.fontsize': font_size,
-    #     'legend.title_fontsize': font_size,
-    #     'xtick.labelsize': font_size,
-    #     'ytick.labelsize': font_size
-    # })
-
-    # set style
-    # # plt.style.use('_classic_test')
-    # plt.style.use('seaborn-whitegrid')
-    # plt.rcParams.update({'axes.grid': True,
-    #                      'axes.labelsize': 18,
-    #                      'axes.titlesize': 18,
-    #                      'figure.facecolor': 'white',
-    #                      'font.size': 18,
-    #                      'legend.fontsize': 18,
-    #                      'xtick.labelsize': 18,
-    #                      'ytick.labelsize': 18,
-    #                      })
-    # plt.rc('text', usetex=True)
-    # TODO allow user to specify different style in options
     plt.style.use(os.path.join(include_dir, 'uplot.mplstyle'))
 
 
@@ -153,17 +125,18 @@ class Figure:
 
         # Iterate through figure objects and draw
         for figure_object in self._figure_objects:
+            # noinspection PyProtectedMember
             figure_object._to_mpl(figure, axis)
 
         # Canvas
         # figure.patch.set_facecolor(self.get_style('background'))
 
         # Set plot elements
-        axis.set_xlabel(self.get_style('xtitle'))
-        axis.set_ylabel(self.get_style('ytitle'))
-        axis.set_xlim(self.get_style('xmin'), self.get_style('xmax'))
-        axis.set_ylim(self.get_style('ymin'), self.get_style('ymax'))
-        axis.tick_params(axis='x', labelrotation=self.get_style('xrotation'))
+        axis.set_xlabel(self.get_style('x_title'))
+        axis.set_ylabel(self.get_style('y_title'))
+        axis.set_xlim(self.get_style('x_min'), self.get_style('x_max'))
+        axis.set_ylim(self.get_style('y_min'), self.get_style('y_max'))
+        axis.tick_params(axis='x', labelrotation=self.get_style('x_rotation'))
 
         # Legend
         if self.get_style('legend'):
@@ -188,14 +161,14 @@ class Figure:
     def to_plotnine(self):
         pass
 
+    # noinspection PyShadowingNames
     def to_plotly(self, height='4.8in', width='6.4in'):
         import plotly.graph_objects as go
         figure = go.Figure()
         for figure_object in self._figure_objects:
+            # noinspection PyProtectedMember
             figure_object._to_plotly(figure)
         display(HTML(figure.to_html(default_height=height, default_width=width)))
-
-
 
 
 class FigureObject(Figure):
@@ -267,14 +240,15 @@ class Line(FigureObject):
             y = data[column].values
             label = self.get_style('label', default=column, index=i)
             color = self.get_style('color', index=i)
-            linestyle = self.get_style('linestyle', index=i)
-            if linestyle is not None:
-                linestyle = linestyles_mpl[linestyle]
+            line_style = self.get_style('line_style', index=i)
+            if line_style is not None:
+                line_style = mpl_line_styles[line_style]
             marker = self.get_style('marker', index=i)
             if marker is not None:
-                marker = markers_mpl[marker]
-            axis.plot(x, y, label=label, color=color, linestyle=linestyle, marker=marker)
+                marker = mpl_markers[marker]
+            axis.plot(x, y, label=label, color=color, linestyle=line_style, marker=marker)
 
+    # noinspection PyShadowingNames
     def _to_plotly(self, figure):
         import plotly.graph_objects as go
 
@@ -291,6 +265,7 @@ class Line(FigureObject):
             # if marker is not None:
             #     marker = markers_mpl[marker]
             figure.add_trace(go.Scatter(x=x, y=y, mode='lines', name=label))
+
 
 #
 # class Point(FigureObject):
@@ -312,7 +287,7 @@ def figure(data=None, x=None, y=None, style=None):
 
     Parameters
     ----------
-    datax : pandas.DataFrame
+    data : pandas.DataFrame
         If provided, uses the data in `data` for the figure.
     x : str or ArrayLike
         If provided, and `data` is not set, this is the independent variable.
@@ -347,11 +322,11 @@ def bar(x=None, y=None, style=None):
     return element
 
 
-def line(x=None, y=None, style=None):
+def line(x=None, y=None, line_style=None):
     data = None
     if x is not None and y is not None:
         data = _coerce_data_x_y(None, x, y)
-    style = _coerce_style(style, defaults={'linestyle': 'solid'})
+    style = _coerce_style(line_style, defaults={'line_style': 'solid'})
     element = Line(data, style)
     return element
 

@@ -11,7 +11,7 @@ from typelike import ArrayLike
 
 
 # Plot
-def plot(data_or_x, y=None, xtitle=None, ytitle=None, xrotation=None, height=None, width=None, legend=False,
+def plot(data_or_x, y=None, x_title=None, y_title=None, x_rotation=None, height=None, width=None, legend=False,
          marker=None, show=True):
     """
 
@@ -23,9 +23,9 @@ def plot(data_or_x, y=None, xtitle=None, ytitle=None, xrotation=None, height=Non
     y : ArrayLike or None
         If present, `y` dimension for plotting. If this is an array of arrays, every interior array will be treated
         as a dependent variable to `x`.
-    xtitle : str or None
+    x_title : str or None
         Title of the `x` axis.
-    ytitle : str or None
+    y_title : str or None
         Title of the `y` axis.
     legend : bool or ArrayLike
         If bool, yes or no if the legend should be display. If this is ArrayLike, then these are the legend titles.
@@ -48,9 +48,9 @@ def plot(data_or_x, y=None, xtitle=None, ytitle=None, xrotation=None, height=Non
 
     # Create figure
     figure = core.figure(data=data, x=x, y=y, style={
-        'xtitle': xtitle,
-        'ytitle': ytitle,
-        'xrotation': xrotation,
+        'x_title': x_title,
+        'y_title': y_title,
+        'x_rotation': x_rotation,
         'height': height,
         'width': width,
         'legend': legend
