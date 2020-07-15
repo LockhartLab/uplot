@@ -390,7 +390,7 @@ def _coerce_data_x_y(data, x, y):
                     y_label_default = 'y'
                 else:
                     y_label_default = 'y' + str(i)
-                y_label = _get_label(y, default=y_label_default)
+                y_label = _get_label(yi, default=y_label_default)
                 data[y_label] = yi
 
         # If data is not set, and x and y are not arrays, we don't know what we're doing
