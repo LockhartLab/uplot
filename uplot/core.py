@@ -140,6 +140,8 @@ class Figure:
         axis.set_ylabel(self.get_style('y_title'))
         axis.set_xlim(self.get_style('x_min'), self.get_style('x_max'))
         axis.set_ylim(self.get_style('y_min'), self.get_style('y_max'))
+        axis.tick_params(which='minor', length=self.get_style('n_minor_ticks'))
+        axis.tick_params(which='major', length=self.get_style('n_major_ticks'))
         axis.tick_params(axis='x', labelrotation=self.get_style('x_rotation'))
 
         # Legend
