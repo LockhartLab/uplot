@@ -140,13 +140,14 @@ class Figure:
         axis.set_ylabel(self.get_style('y_title'))
         axis.set_xlim(self.get_style('x_min'), self.get_style('x_max'))
         axis.set_ylim(self.get_style('y_min'), self.get_style('y_max'))
-        n_minor_ticks, n_major_ticks = self.get_style('n_minor_ticks'), self.get_style('n_major_ticks')
-        if n_minor_ticks is not None:
-            # axis.tick_params(which='minor', length=n_minor_ticks)
-            axis.xaxis.set_minor_locator(plt.MaxNLocator(n_minor_ticks))
-        if n_major_ticks is not None:
-            # axis.tick_params(which='major', length=n_major_ticks)
-            axis.xaxis.set_major_locator(plt.MaxNLocator(n_major_ticks))
+        # TODO https://matplotlib.org/3.1.0/api/dates_api.html#matplotlib.dates.IndexDateFormatter set up date format
+        # n_minor_ticks, n_major_ticks = self.get_style('n_minor_ticks'), self.get_style('n_major_ticks')
+        # if n_minor_x_ticks is not None:
+        #     # axis.tick_params(which='minor', length=n_minor_ticks)
+        #     axis.xaxis.set_minor_locator(plt.MaxNLocator(n_minor_ticks))
+        # if n_x_major_x_ticks is not None:
+        #     # axis.tick_params(which='major', length=n_major_ticks)
+        #     axis.xaxis.set_major_locator(plt.MaxNLocator(n_major_ticks))
         axis.tick_params(axis='x', labelrotation=self.get_style('x_rotation'))
 
         # Legend
@@ -167,9 +168,10 @@ class Figure:
             plt.close(figure)
             return None
         else:
-            return figure
+            return figure, axis
 
     def to_plotnine(self):
+        # https: // stackoverflow.com / questions / 19921842 / plotting - multiple - time - series - on - the - same - plot - using - ggplot
         pass
 
     # noinspection PyShadowingNames

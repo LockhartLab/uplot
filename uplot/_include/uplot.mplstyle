@@ -41,14 +41,17 @@ text.color: black
 font.style: normal
 font.weight: normal
 font.family: sans-serif
-font.sans-serif: Arial
+# used to be Arial
+font.sans-serif: DejaVu Sans
 font.size: 12
-axes.labelsize: 14
+# used to be 14
+axes.labelsize: 12
 axes.titlesize: 12
 legend.fontsize: 12
 xtick.labelsize: 12
 ytick.labelsize: 12
-mathtext.fontset: stix
+# used to be stix
+mathtext.fontset: dejavusans
 
 # legend
 legend.frameon: False
