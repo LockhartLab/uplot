@@ -17,6 +17,7 @@ jobs:
       after_success:
         - bash <(curl -s https://codecov.io/bash)
         - |
+          ls
           version=$(python _scripts/increment_version.py)
           return_code=$(echo $?)
           if [ ${return_code} -ne 0 ]
