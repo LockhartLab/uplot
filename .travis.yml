@@ -18,6 +18,11 @@ jobs:
         - bash <(curl -s https://codecov.io/bash)
         - |
           version=$(python _scripts/increment_version.py)
+          return_code=$(echo $?)
+          if [ ${return_code} -ne 0 ]
+          then
+            exit $return_code
+          fi
           git config user.name "doclockh"
           git config user.email "chris@lockhartlab.org"
           git checkout master
