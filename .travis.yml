@@ -18,9 +18,9 @@ jobs:
         - bash <(curl -s https://codecov.io/bash)
         - |
           version=$(python _scripts/increment_version.py)
-          cd docs
-          make html
-          cd ..
+#          cd docs
+#          make html
+#          cd ..
           git config user.name "doclockh"
           git config user.email "chris@lockhartlab.org"
           git checkout master
