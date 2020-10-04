@@ -115,6 +115,22 @@ class Figure:
     # Convert figure to matplotlib
     # noinspection PyShadowingNames
     def to_mpl(self, show=False, save_as=None):
+        """
+        Convert to matplotlib objects.
+
+        Parameters
+        ----------
+        show : bool
+            Should the figure be displayed?
+        save_as : None or str
+            If str is provided, filename to save the figure as.
+
+        Returns
+        -------
+        matplotlib.pyplot.Figure, matplotlib.pyplot.Axis
+            Returned only if `show` = False.
+        """
+
         # Make sure pyplot is loaded
         import matplotlib.pyplot as plt
         set_mpl_theme()
@@ -329,23 +345,21 @@ def figure(data=None, x=None, y=None, style=None):
 
 
 def bar(x=None, y=None, style=None):
-    data = _coerce_data_x_y(None, x, y)
+    data = _coerce_x_y(x, y)
     style = _coerce_style(style, defaults={'line_style': 'solid'})
     element = Bar(data, style)
     return element
 
 
 def line(x=None, y=None, style=None):
-    data = None
-    if x is not None and y is not None:
-        data = _coerce_data_x_y(None, x, y)
+    data = _coerce_x_y(x, y)
     style = _coerce_style(style, defaults={'line_style': 'solid'})
     element = Line(data, style)
     return element
 
 
 def point(x=None, y=None, style=None):
-    data = _coerce_data_x_y(None, x, y)
+    data = _coerce_x_y(x, y)
     style = _coerce_style(style, defaults={'marker': 'circle'})
     element = Line(data, style=style)
     return element
@@ -357,6 +371,23 @@ def _get_label(x, default='x'):
     if isinstance(x, pd.Series):
         label = x.name
     return label
+
+
+# Coerce x and y into expected types and formats
+# TODO is there a need for this and _coerce_data_x_y?? I don't think so.
+def _coerce_x_y(x, y):
+    # Sanity check
+    if x is None:
+        raise AttributeError('cannot parse data')
+
+    # Create data
+    data = None
+    if y is None:
+        data = x
+        x = None
+
+    # Coerce data, x, and y
+    return _coerce_data_x_y(data, x, y)
 
 
 # Coerce data and x and y into expected types and formats
@@ -387,7 +418,7 @@ def _coerce_data_x_y(data, x, y):
 
     # Otherwise, if data is a DataFrame, extract out x and y columns
     elif isinstance(data, pd.DataFrame):
-        # Create a copy of the dataframe
+        # Create a copy of the DataFrame
         data = data.copy()
 
         # Set the index

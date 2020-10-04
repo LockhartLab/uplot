@@ -20,17 +20,25 @@ def plot(data_or_x, y=None, x_title=None, y_title=None, x_rotation=None, height=
     ----------
     data_or_x : pandas.DataFrame or ArrayLike
         DataFrame to plot, or the `x` dimension for plotting.
-    y : ArrayLike or None
-        If present, `y` dimension for plotting. If this is an array of arrays, every interior array will be treated
-        as a dependent variable to `x`.
-    x_title : str or None
-        Title of the `x` axis.
-    y_title : str or None
-        Title of the `y` axis.
+    y : ArrayLike
+        (Optional) If present, `y` dimension for plotting. If this is an array of arrays, every interior array will be
+        treated as a dependent variable to `x`.
+    x_title : str
+        (Optional) Title of the `x` axis.
+    y_title : str
+        (Optional) Title of the `y` axis.
+    x_rotation : float
+        (Optional) Rotation of `x` axis tick labels.
+    height : float
+        (Optional) Height of chart.
+    width : float
+        (Optional) Width of chart.
     legend : bool or ArrayLike
         If bool, yes or no if the legend should be display. If this is ArrayLike, then these are the legend titles.
+    marker : str
+        (Optional) Point marker.
     show : bool
-        Should the figure be shown?
+        Should the figure be shown? (Default: True)
 
     Returns
     -------
