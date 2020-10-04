@@ -10,6 +10,9 @@ import pandas as pd
 from typelike import ArrayLike
 
 
+def pivot():
+    pass
+
 # Plot
 def plot(data_or_x, y=None, x_title=None, y_title=None, x_rotation=None, height=None, width=None, legend=False,
          marker=None, show=True):
