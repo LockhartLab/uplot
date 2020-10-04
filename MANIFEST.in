@@ -1,3 +1,4 @@
 include uplot/_include/*
 include requirements.txt
+include _scripts/increment_version.py
 include version.yml
