@@ -79,7 +79,8 @@ class Figure:
         return obj
 
     def __repr__(self):
-        self.to_mpl(show=True)
+        if not _is_pycharm():
+            self.to_mpl(show=True)
         return super().__repr__()
 
     # Add FigureObject
@@ -461,7 +462,12 @@ def _coerce_style(style, defaults=None):
 #     + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'label': 'y2'})
 # ).to_mpl(show=True)
 
-# Check if we are in a jupyter window
+# Check if we are in PyCharm
+def _is_pycharm():
+    return '_pydev_imps' in sys.modules
+
+
+# Check if we are in a Jupyter window
 def _is_jupyter():
     """
 
@@ -475,7 +481,7 @@ def _is_jupyter():
     -------
 
     """
-    return get_ipython() and 'qtconsole' not in sys.modules and '_pydev_imps' not in sys.modules
+    return get_ipython() and 'qtconsole' not in sys.modules and not _is_pycharm()
 
 
 # Display SVG in IPython (for matplotlib)
