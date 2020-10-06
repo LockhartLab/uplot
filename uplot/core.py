@@ -34,8 +34,6 @@ import yaml
 # Include directory
 include_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_include')
 
-disable_jupyter = False
-
 # TODO lazy load this please
 with open(os.path.join(include_dir, 'mpl_markers.yml'), 'r') as stream:
     mpl_markers = yaml.safe_load(stream.read())
@@ -182,12 +180,7 @@ class Figure:
         # Return
         if show:
             if _is_jupyter():
-                try:
-                    _display_svg(figure)
-                except:
-                    global disable_jupyter
-                    disable_jupyter = True
-                    figure.show()
+                _display_svg(figure)
             else:
                 figure.show()
             plt.close(figure)
@@ -468,8 +461,21 @@ def _coerce_style(style, defaults=None):
 #     + line([1, 2, 3], [6, 5, 4], style={'marker': 'circle', 'label': 'y2'})
 # ).to_mpl(show=True)
 
+# Check if we are in a jupyter window
 def _is_jupyter():
-    return not disable_jupyter and get_ipython() and 'qtconsole' not in sys.modules
+    """
+
+    Exclude QtConsole:
+    'qtconsole' not in sys.modules
+
+    Exclude PyCharm:
+    '_pydev_imps' not in sys.modules
+
+    Returns
+    -------
+
+    """
+    return get_ipython() and 'qtconsole' not in sys.modules and '_pydev_imps' not in sys.modules
 
 
 # Display SVG in IPython (for matplotlib)
