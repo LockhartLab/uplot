@@ -18,8 +18,9 @@ def hist():
 
 # Pivot and plot
 # TODO support 2D histograms
-def pivot(df, index, values, bins, show=True):
-    xy = iz.pivot(df, index=index, values=values, aggfunc='mean', bins=bins)
+# TODO right now follows format of pandas -- may change
+def pivot(df, index, values, aggfunc='mean', bins=10, show=True):
+    xy = iz.pivot(df, index=index, values=values, aggfunc=aggfunc, bins=bins)
     figure = core.figure(style={
         'x_title': index,
         'y_title': values
