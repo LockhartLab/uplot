@@ -6,12 +6,30 @@ author: C. Lockhart <chris@lockhartlab.org>
 
 from . import core
 
+import izzy as iz
 import pandas as pd
 from typelike import ArrayLike
 
 
-def pivot():
+# Histogram
+def hist():
     pass
+
+
+# Pivot and plot
+# TODO support 2D histograms
+def pivot(df, index, values, bins, show=True):
+    xy = iz.pivot(df, index=index, values=values, aggfunc='mean', bins=bins)
+    figure = core.figure(style={
+        'x_title': index,
+        'y_title': values
+    })
+    figure += core.line(xy.index.values, xy.iloc[:, 0].values)
+    if show:
+        figure.show()
+    else:
+        return figure
+
 
 # Plot
 def plot(data_or_x, y=None, x_title=None, y_title=None, x_rotation=None, height=None, width=None, legend=False,
@@ -75,4 +93,3 @@ def plot(data_or_x, y=None, x_title=None, y_title=None, x_rotation=None, height=
         figure.to_mpl(show=show)
     else:
         return figure.to_mpl(show=False)
-

@@ -2,6 +2,7 @@ codecov
 coverage
 hypothesis
 IPython
+izzy
 matplotlib
 numpy
 pandas

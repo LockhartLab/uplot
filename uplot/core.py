@@ -115,6 +115,14 @@ class Figure:
             result = result[index]
         return result
 
+    # Show figure
+    def show(self):
+        """
+        Show Figure using the default backend.
+        """
+
+        self.to_mpl(show=True)
+
     # Convert figure to matplotlib
     # noinspection PyShadowingNames
     def to_mpl(self, show=False, save_as=None):
